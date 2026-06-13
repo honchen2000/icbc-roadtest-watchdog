@@ -33,11 +33,27 @@ is what makes it work — and it means **your credentials never leave your devic
 
 ## Install
 
-> Signed installers for macOS / Windows / Linux will be published on the
-> [Releases](../../releases) page. _(Coming with the first release.)_
+Download the installer for your OS from the [Releases](../../releases) page
+(built automatically by CI on each tagged release):
 
-Unsigned builds will show an "unidentified developer" (macOS) or SmartScreen
-(Windows) warning — instructions to allow them will be in the release notes.
+- **macOS** — `.dmg`
+- **Windows** — `.exe` (NSIS installer)
+- **Linux** — `.AppImage`
+
+### First launch (unsigned app)
+
+Builds are **not code-signed**, so your OS will warn on first launch:
+
+- **macOS**: right-click the app → **Open** → **Open** (only needed the first time).
+- **Windows**: SmartScreen → **More info** → **Run anyway**.
+
+### Build the installers yourself
+
+```bash
+npm install
+npm run dist     # installers in dist/
+# or: npm run pack   # unpacked .app/.exe in dist/ (no installer) for quick testing
+```
 
 ### Run from source (developers)
 

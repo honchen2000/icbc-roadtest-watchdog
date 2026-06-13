@@ -26,10 +26,21 @@
   "engines": {
     "node": ">=22.18"
   },
+  "build": {
+    "appId": "dev.honchen2000.icbc-roadtest-watchdog",
+    "productName": "ICBC Road Test Watchdog",
+    "files": ["out/**", "package.json"],
+    "directories": { "buildResources": "build" },
+    "mac": { "target": "dmg", "category": "public.app-category.utilities", "identity": null },
+    "win": { "target": "nsis" },
+    "linux": { "target": "AppImage", "category": "Utility" }
+  },
   "scripts": {
     "dev": "electron-vite dev",
     "build": "electron-vite build",
     "preview": "electron-vite preview",
+    "pack": "electron-vite build && electron-builder --dir",
+    "dist": "electron-vite build && electron-builder",
     "typecheck": "tsc --noEmit",
     "test": "node --test",
     "cli": "tsx src/cli.ts",
@@ -38,6 +49,7 @@
   "devDependencies": {
     "@types/node": "^25.9.3",
     "electron": "^42.4.0",
+    "electron-builder": "^26.15.3",
     "electron-vite": "^5.0.0",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
