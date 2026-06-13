@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- CSP is applied per-environment from the main process (session headers). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ICBC Road Test Watchdog</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body { font-family: -apple-system, "Segoe UI", system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+      h1 { font-size: 1.3rem; margin-bottom: .2rem; }
+      .sub { color: #888; font-size: .85rem; margin-top: 0; }
+      #status { background: rgba(127,127,127,.12); border-radius: 10px; padding: .8rem 1rem; margin: 1rem 0; font-size: .95rem; }
+      .row { display: flex; gap: .5rem; flex-wrap: wrap; }
+      button { padding: .55rem 1rem; border: 0; border-radius: 8px; font-size: .9rem; cursor: pointer; background: #2563eb; color: #fff; }
+      button.alt { background: #6b7280; }
+      .note { color: #888; font-size: .82rem; margin-top: 1.2rem; }
+      code { background: rgba(127,127,127,.18); padding: .05rem .3rem; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <h1>🐕 ICBC Road Test Watchdog</h1>
+    <p class="sub">Read-only — it never books for you.</p>
+
+    <div id="status">Loading…</div>
+
+    <div class="row">
+      <button id="start">Start watching</button>
+      <button id="stop" class="alt">Stop</button>
+      <button id="folder" class="alt">Open settings folder</button>
+    </div>
+
+    <p class="note">
+      ⚙️ The setup form arrives in M3. For now, put a <code>settings.json</code> (same
+      shape as <code>config.example.json</code>, plus <code>intervalSeconds</code> and a
+      <code>telegram</code> block) in the settings folder, then click Start.
+    </p>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

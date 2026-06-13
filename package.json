@@ -14,6 +14,7 @@
   "license": "MIT",
   "author": "honchen2000",
   "type": "module",
+  "main": "./out/main/index.cjs",
   "homepage": "https://github.com/honchen2000/icbc-roadtest-watchdog#readme",
   "repository": {
     "type": "git",
@@ -26,14 +27,20 @@
     "node": ">=22.18"
   },
   "scripts": {
-    "cli": "tsx src/cli.ts",
-    "cli:node": "node src/cli.ts",
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "node --test"
+    "test": "node --test",
+    "cli": "tsx src/cli.ts",
+    "cli:node": "node src/cli.ts"
   },
   "devDependencies": {
     "@types/node": "^25.9.3",
+    "electron": "^42.4.0",
+    "electron-vite": "^5.0.0",
     "tsx": "^4.22.4",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vite": "^7.3.5"
   }
 }

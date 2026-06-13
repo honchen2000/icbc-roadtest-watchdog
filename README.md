@@ -41,15 +41,17 @@ Unsigned builds will show an "unidentified developer" (macOS) or SmartScreen
 
 ### Run from source (developers)
 
-> 🚧 The Electron app isn't built yet (pre-M2 — see [PLAN.md](PLAN.md)); `npm start`
-> currently just prints a status message. The steps below are the intended flow.
-
 ```bash
 git clone <this-repo>
 cd icbc-roadtest-watchdog
 npm install
-npm start          # (after M2) launches the Electron app
+npm run dev        # launches the Electron app (tray + window)
 ```
+
+> The setup form is still being built (M3). For now, create a `settings.json` in the
+> app's settings folder (use the "Open settings folder" button) with the same shape as
+> [`config.example.json`](config.example.json) plus `intervalSeconds` and a `telegram`
+> block, then click **Start**.
 
 Requires Node.js 22.18+ (the dev CLI runs TypeScript directly via Node's built-in
 type stripping; `npm run cli` also works on older Node ≥18 via the bundled `tsx`).

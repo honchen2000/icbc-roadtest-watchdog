@@ -13,6 +13,9 @@ This app has **no backend and no telemetry**. Everything runs on your own device
   bot token / chat id are sent to **Telegram's API** (to deliver the message). You
   provide these yourself and can remove them anytime.
 - No analytics, no tracking, no accounts, no cloud storage.
+- Local files (settings.json, state.json) are written owner-only (mode 0600) on
+  macOS/Linux; on Windows that mode is advisory and the files inherit the userData
+  folder's permissions.
 
 ---
 
@@ -25,3 +28,4 @@ This app has **no backend and no telemetry**. Everything runs on your own device
 - 若你啟用 **Telegram** 通知，只有通知文字與你自己的 bot token／chat id 會傳到
   **Telegram API**（用於送出訊息），且由你自行提供、隨時可移除。
 - 無分析、無追蹤、無帳號、無雲端儲存。
+- 本機檔案（settings.json、state.json）在 macOS/Linux 以僅擁有者可讀寫（0600）寫入；Windows 上此權限僅供參考，沿用 userData 資料夾權限。
