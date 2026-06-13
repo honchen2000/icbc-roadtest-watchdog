@@ -19,6 +19,8 @@
       .check { display: flex; align-items: center; gap: .5rem; margin: .5rem 0; }
       .check input { width: auto; }
       .hint { color: #888; font-size: .75rem; margin: .25rem 0 0; }
+      .chips { display: flex; gap: .35rem; flex-wrap: wrap; margin-top: .4rem; }
+      .chip { background: rgba(37,99,235,.15); color: inherit; border: 1px solid rgba(37,99,235,.45); border-radius: 999px; padding: .2rem .6rem; font-size: .78rem; cursor: pointer; }
       #status { background: rgba(127,127,127,.12); border-radius: 10px; padding: .7rem 1rem; margin: 1rem 0; font-size: .9rem; }
       .row { display: flex; gap: .5rem; flex-wrap: wrap; margin: .6rem 0; }
       button { padding: .55rem 1rem; border: 0; border-radius: 8px; font: inherit; font-size: .88rem; cursor: pointer; background: #2563eb; color: #fff; }
@@ -64,7 +66,8 @@
 
         <label for="locations">Locations — one per line as <code>id:Name</code></label>
         <textarea id="locations" placeholder="93:Richmond&#10;11:Surrey"></textarea>
-        <p class="hint">The id is the ICBC <code>aPosID</code>. Known: 9 Point Grey · 93 Richmond · 2 Burnaby · 11 Surrey · 73 Port Coquitlam · 153 Langley. (Address search comes in a later release.)</p>
+        <p class="hint">Quick-add common offices, or type <code>id:Name</code> for any other (the id is the ICBC <code>aPosID</code>, findable in DevTools):</p>
+        <div id="officeChips" class="chips"></div>
 
         <label for="notifyBeforeDate">Only notify for slots on/before (optional)</label>
         <input id="notifyBeforeDate" type="date" />

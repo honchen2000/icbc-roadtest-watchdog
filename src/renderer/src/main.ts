@@ -57,6 +57,37 @@ function parseLocations(text: string): LocationRef[] {
     .filter((loc) => Number.isInteger(loc.id));
 }
 
+// Verified Greater-Vancouver offices for one-click adding. Any other office can be
+// typed manually as id:Name (province-wide address search is a future enhancement).
+const KNOWN_OFFICES: LocationRef[] = [
+  { id: 9, name: "Point Grey" },
+  { id: 93, name: "Richmond" },
+  { id: 2, name: "Burnaby" },
+  { id: 11, name: "Surrey" },
+  { id: 73, name: "Port Coquitlam" },
+  { id: 153, name: "Langley" },
+  { id: 8, name: "North Vancouver" },
+];
+
+function addOffice(office: LocationRef): void {
+  const ta = el<HTMLTextAreaElement>("locations");
+  if (parseLocations(ta.value).some((l) => l.id === office.id)) return;
+  const prefix = ta.value.trim() ? `${ta.value.trim()}\n` : "";
+  ta.value = `${prefix}${office.id}:${office.name}`;
+}
+
+function renderChips(): void {
+  const box = el("officeChips");
+  for (const office of KNOWN_OFFICES) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip";
+    chip.textContent = `+ ${office.name}`;
+    chip.addEventListener("click", () => addOffice(office));
+    box.appendChild(chip);
+  }
+}
+
 function populate(s: AppSettings | null): void {
   loaded = s;
   syncExamCustom();
@@ -151,6 +182,7 @@ el("folderLink").addEventListener("click", (e) => {
   void api.openDataFolder();
 });
 
+renderChips();
 api.onStatus(renderStatus);
 void (async () => {
   populate(await api.getSettings());
