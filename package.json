@@ -1,0 +1,31 @@
+{
+  "name": "icbc-roadtest-watchdog",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Free, open-source desktop app that watches for earlier ICBC road-test slots and notifies you (read-only, never books).",
+  "keywords": [
+    "icbc",
+    "road-test",
+    "appointment",
+    "notifier",
+    "electron",
+    "british-columbia"
+  ],
+  "license": "MIT",
+  "author": "honchen2000",
+  "type": "module",
+  "homepage": "https://github.com/honchen2000/icbc-roadtest-watchdog#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/honchen2000/icbc-roadtest-watchdog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/honchen2000/icbc-roadtest-watchdog/issues"
+  },
+  "engines": {
+    "node": ">=20.6"
+  },
+  "scripts": {
+    "start": "echo \"The Electron app is not built yet (pre-M2) — see PLAN.md\""
+  }
+}
