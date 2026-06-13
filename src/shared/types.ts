@@ -6,6 +6,7 @@ import type { WatchConfig } from "../core/types.ts";
 export interface AppSettings extends WatchConfig {
   intervalSeconds: number;
   telegram: { enabled: boolean; botToken: string; chatId: string };
+  launchAtLogin?: boolean;
 }
 
 export interface WatchdogStatus {

@@ -48,10 +48,10 @@ npm install
 npm run dev        # launches the Electron app (tray + window)
 ```
 
-> The setup form is still being built (M3). For now, create a `settings.json` in the
-> app's settings folder (use the "Open settings folder" button) with the same shape as
-> [`config.example.json`](config.example.json) plus `intervalSeconds` and a `telegram`
-> block, then click **Start**.
+> When the app opens, fill in the **settings form** (ICBC login, road-test class,
+> locations, optional Telegram), click **Save settings**, then **Start watching**.
+> The first cycle silently establishes a baseline — you're alerted only when *new*
+> slots appear afterwards.
 
 Requires Node.js 22.18+ (the dev CLI runs TypeScript directly via Node's built-in
 type stripping; `npm run cli` also works on older Node ≥18 via the bundled `tsx`).

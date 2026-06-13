@@ -23,6 +23,23 @@ function buildNotifier(s: AppSettings): Notifier {
   return new MultiNotifier(list);
 }
 
+function applyLaunchAtLogin(s: AppSettings): void {
+  if (process.platform === "linux") return; // not supported via this API on Linux
+  app.setLoginItemSettings({ openAtLogin: s.launchAtLogin === true });
+}
+
+/** If Telegram is enabled but the token field is left blank, keep the saved token. */
+function mergeKeptToken(input: unknown, current: AppSettings | null): unknown {
+  if (typeof input !== "object" || input === null) return input;
+  const o = input as Record<string, unknown>;
+  const tg = (o.telegram ?? {}) as Record<string, unknown>;
+  const saved = current?.telegram?.botToken;
+  if (tg.enabled === true && (tg.botToken === "" || tg.botToken === undefined) && saved) {
+    return { ...o, telegram: { ...tg, botToken: saved } };
+  }
+  return input;
+}
+
 function currentStatus(): WatchdogStatus {
   const s = scheduler?.getStatus();
   return {
@@ -110,13 +127,19 @@ function createTray(): void {
 }
 
 ipcMain.handle("get-status", () => currentStatus());
-ipcMain.handle("get-settings", () => settings);
+ipcMain.handle("get-settings", () =>
+  settings ? { ...settings, telegram: { ...settings.telegram, botToken: "" } } : null,
+);
 ipcMain.handle("save-settings", async (_e, next: unknown) => {
-  const valid = validateSettings(next); // throws on malformed input → renderer promise rejects
+  const merged = mergeKeptToken(next, settings); // keep saved Telegram token if left blank
+  const valid = validateSettings(merged); // throws on malformed input → renderer promise rejects
+  const wasRunning = scheduler?.getStatus().running === true;
   await saveSettings(valid);
   settings = valid;
+  applyLaunchAtLogin(valid);
   scheduler?.stop();
-  scheduler = null; // rebuilt with new settings on next start
+  scheduler = null; // rebuilt with new settings
+  if (wasRunning) ensureScheduler()?.start(); // preserve running state across a save
   pushStatus();
 });
 ipcMain.handle("start", () => {
@@ -152,6 +175,7 @@ function installCsp(): void {
 async function bootstrap(): Promise<void> {
   installCsp();
   settings = await loadSettings();
+  if (settings) applyLaunchAtLogin(settings);
   createTray();
   showWindow();
   if (settings) ensureScheduler()?.start(); // auto-start when already configured

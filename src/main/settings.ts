@@ -79,6 +79,7 @@ export function validateSettings(input: unknown): AppSettings {
     partsOfDay: typeof o.partsOfDay === "string" ? o.partsOfDay : undefined,
     intervalSeconds,
     telegram,
+    launchAtLogin: o.launchAtLogin === true,
   };
 }
 

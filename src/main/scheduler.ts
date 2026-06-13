@@ -33,6 +33,11 @@ export class Scheduler {
     return { ...this.status };
   }
 
+  private redactToken(msg: string): string {
+    const token = this.settings.telegram?.botToken;
+    return token ? msg.split(token).join("***") : msg;
+  }
+
   start(): void {
     if (this.running) return;
     this.running = true;
@@ -65,12 +70,12 @@ export class Scheduler {
       if (!this.running) return; // stopped while the network call was in flight
       this.status.lastCheckAt = result.at;
       this.status.lastFound = result.found.length;
-      this.status.lastError = result.errors[0] ?? null;
+      this.status.lastError = result.errors[0] ? this.redactToken(result.errors[0]) : null;
       if (result.newSlots.length > 0) {
         await this.notifier.notify(result.newSlots);
       }
     } catch (err) {
-      this.status.lastError = err instanceof Error ? err.message : String(err);
+      this.status.lastError = this.redactToken(err instanceof Error ? err.message : String(err));
     }
     this.onUpdate(this.getStatus());
     if (this.running) {
