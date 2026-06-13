@@ -23,9 +23,17 @@
     "url": "https://github.com/honchen2000/icbc-roadtest-watchdog/issues"
   },
   "engines": {
-    "node": ">=20.6"
+    "node": ">=22.18"
   },
   "scripts": {
-    "start": "echo \"The Electron app is not built yet (pre-M2) — see PLAN.md\""
+    "cli": "tsx src/cli.ts",
+    "cli:node": "node src/cli.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.3",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
   }
 }

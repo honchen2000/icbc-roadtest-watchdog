@@ -51,7 +51,8 @@ npm install
 npm start          # (after M2) launches the Electron app
 ```
 
-Requires Node.js 20.6+.
+Requires Node.js 22.18+ (the dev CLI runs TypeScript directly via Node's built-in
+type stripping; `npm run cli` also works on older Node ≥18 via the bundled `tsx`).
 
 ---
 

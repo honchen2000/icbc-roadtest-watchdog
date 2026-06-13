@@ -16,9 +16,10 @@ build/Release/
 .env
 .env.*
 *.local
-config.local.json
+*.local.json
 
 # logs / misc
 *.log
+*.tmp
 .DS_Store
 Thumbs.db
